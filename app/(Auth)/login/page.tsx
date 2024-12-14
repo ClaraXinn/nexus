@@ -54,7 +54,7 @@ export default function LoginPage() {
         {/* Form Section */}
         <form
           onSubmit={handleSubmit}
-          className="bg-primary w-80 sm:w-[320px] "
+          className="bg-primary w-72 sm:w-[400px]"
           noValidate
         >
           <h1 className="text-2xl text-center font-bold">
