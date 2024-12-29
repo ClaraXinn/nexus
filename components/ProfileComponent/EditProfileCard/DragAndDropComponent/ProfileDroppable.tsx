@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useProfileContext } from "@/context/profileContext";
 import { typeIconMap } from "@/lib/icon";
+import { InputPlaceholder } from "@/lib/input_placeholder";
 import { PROFILE_COMPONENT_CATEGORY, ProfileDndComponent } from "@/lib/type";
 import { DraggableAttributes } from "@dnd-kit/core";
 import { SyntheticListenerMap } from "@dnd-kit/core/dist/hooks/utilities";
@@ -67,9 +68,7 @@ const DndComponentHeader = ({
 // Reusable component for input fields
 const DndInputField = <T extends FieldValues>({
   type,
-  placeholder,
   index,
-  icontype,
   inputType,
   formRegister,
   formErrors,
@@ -77,9 +76,8 @@ const DndInputField = <T extends FieldValues>({
   setComponents,
 }: {
   type: string;
-  placeholder: string;
   index: number;
-  icontype: string;
+
   inputType: keyof T;
   formRegister: UseFormRegister<T>;
   formErrors?: string;
@@ -88,13 +86,16 @@ const DndInputField = <T extends FieldValues>({
 }) => (
   <>
     <div className="flex px-2 w-full max-w-sm items-center gap-1.5 bg-transparent rounded">
-      <div>{typeIconMap[icontype as keyof typeof typeIconMap]}</div>
+      <div>{typeIconMap[type as keyof typeof typeIconMap]}</div>
+
       <Input
         className={`bg-transparent border border-primary focus:border-2 transition-colors ${
-          formErrors ? "border-red-500" : "border-primary"
+          inputType === "value" && formErrors
+            ? "border-red-500"
+            : "border-primary"
         }`}
         type={type}
-        placeholder={placeholder}
+        placeholder={InputPlaceholder[type as keyof typeof InputPlaceholder]}
         {...formRegister(
           `components.${index}.${String(inputType)}` as Path<T>,
           {
@@ -102,7 +103,9 @@ const DndInputField = <T extends FieldValues>({
               const newValue = e.target.value;
               components[index] = {
                 ...components[index],
-                value: newValue,
+                ...(inputType === "value"
+                  ? { value: newValue }
+                  : { display_text: newValue }),
               };
               setComponents([...components]);
             },
@@ -110,7 +113,9 @@ const DndInputField = <T extends FieldValues>({
         )}
       />
     </div>
-    {formErrors && <p className="text-red-500 text-sm pl-8">{formErrors}</p>}
+    {inputType === "value" && formErrors && (
+      <p className="text-red-500 text-sm pl-8">{formErrors}</p>
+    )}
   </>
 );
 
@@ -236,9 +241,17 @@ const DndInputFieldBuilder = <T extends FieldValues>({
           <DndInputField
             type={item.type}
             index={index}
-            placeholder={item.type}
-            icontype={item.type}
             inputType="value"
+            formRegister={formRegister}
+            formErrors={formErrors}
+            components={components}
+            setComponents={setComponents}
+          />
+
+          <DndInputField
+            type="text"
+            index={index}
+            inputType="display_text"
             formRegister={formRegister}
             formErrors={formErrors}
             components={components}

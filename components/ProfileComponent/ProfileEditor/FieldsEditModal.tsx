@@ -36,7 +36,7 @@ export default function FieldsEditModal() {
         category: PROFILE_COMPONENT_CATEGORY.MAP,
       },
     ],
-    Social: [
+    "Social Accounts": [
       {
         label: "Github",
         type: PROFILE_COMPONENT_TYPE.GITHUB,
@@ -92,12 +92,12 @@ export default function FieldsEditModal() {
       {
         label: "WhatsApp",
         type: PROFILE_COMPONENT_TYPE.WHATSAPP,
-        category: PROFILE_COMPONENT_CATEGORY.PHONE,
+        category: PROFILE_COMPONENT_CATEGORY.LINK,
       },
       {
         label: "Telegram",
         type: PROFILE_COMPONENT_TYPE.TELEGRAM,
-        category: PROFILE_COMPONENT_CATEGORY.PHONE,
+        category: PROFILE_COMPONENT_CATEGORY.LINK,
       },
     ],
     Conferencing: [
@@ -134,7 +134,7 @@ export default function FieldsEditModal() {
         category: PROFILE_COMPONENT_CATEGORY.LINK,
       },
     ],
-    Video: [
+    "Embed Video": [
       {
         label: "YouTube",
         type: PROFILE_COMPONENT_TYPE.YOUTUBE,

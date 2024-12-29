@@ -42,25 +42,25 @@ const profileDndComponents: ProfileDndComponent[] = [
     type: "phone",
     category: "phone",
     display_text: "Mobile",
-    value: "1234567890",
+    value: "6594832945",
   },
   // WhatsApp
   {
     id: "107",
     card_id: "1",
     type: "whatsapp",
-    category: "phone",
+    category: "link",
     display_text: "WhatsApp Number",
-    value: "+1234567890",
+    value: "https://wa.me/6594832945",
   },
   // Telegram
   {
     id: "108",
     card_id: "1",
     type: "telegram",
-    category: "phone",
-    display_text: "Telegram Handle",
-    value: "@johndoe",
+    category: "link",
+    display_text: "My Telegram",
+    value: "https://t.me/nayaunglwin1",
   },
   // Text
   {
@@ -123,8 +123,8 @@ const profileDndComponents: ProfileDndComponent[] = [
     card_id: "1",
     type: "discord",
     category: "link",
-    display_text: "Discord Server",
-    value: "https://discord.com/channels/123456789/987654321",
+    display_text: "Discord Account",
+    value: "dice#3040",
   },
   // GitHub
   {
